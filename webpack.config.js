@@ -28,7 +28,10 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    port: 9000,
-  },
+    static: {
+        directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000, 
+},
 };

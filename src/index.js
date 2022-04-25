@@ -13,20 +13,17 @@ const App = () =>{
         var api = 'https://maze.juanelcaballo.club/?type=json&w=ancho&h=alto'
         api = api.replace('ancho', ancho_lab)
         api = api.replace('alto', alto_lab)
-        console.log(api)
         const respuesta = await fetch(api)
             .then(respuesta => respuesta.json())
             .then(datos => datos)
             .catch(error => console.log(error))
     
-        console.log(respuesta)
         return respuesta
     }
 
     const modificar_Laberinto = async() =>{
         const laberinto_modificado = await creacion_Laberinto(ancho, alto)
         setLaberinto(laberinto_modificado)
-        console.log(laberinto_modificado)
     }   
 
     const cambiar_Medidas = () =>{
@@ -38,6 +35,8 @@ const App = () =>{
         if(alto_input !== ""){
             setAlto(alto_input)
         }
+
+        modificar_Laberinto()
     }
 
     React.useEffect( () => {
@@ -51,7 +50,17 @@ const App = () =>{
             Ancho<input type="number" id="ancho"></input>
             Alto<input type="number" id="alto"></input>
             <button onClick={cambiar_Medidas}>Generar</button>
-            
+            <div className="tablero">
+            {
+                laberinto.map((posiciony, y) =>
+                    posiciony.map((posicionx, x) => {
+                        if(posicionx == "-" || posicionx == "|" || posicionx == "+"){
+                            <p key={(x + 5 + y + 10).toString()}>{posicionx}</p>
+                        }
+                    })
+                )
+            }
+            </div>
         </div>
     )
 }

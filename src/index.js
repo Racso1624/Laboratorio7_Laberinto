@@ -11,10 +11,6 @@ const creacion_Laberinto = async(ancho, alto) =>{
         console.log(error))
 }
 
-
-
-
-
 const App = () =>{
 
     const [laberinto, setLaberinto] = React.useState([])
@@ -30,11 +26,29 @@ const App = () =>{
         modificar_Laberinto(nuevoLaberinto)
     }
 
-    const modificar_Ancho = (valorAncho) =>{
-        
+    const cambiar_Medidas = () =>{
+        var ancho_input = Number(document.getElementById("ancho").value)
+        var alto_input = Number(document.getElementById("alto").value)
+        if(ancho_input !== ""){
+            setAncho(ancho_input)
+        }
+        if(alto_input !== ""){
+            setAlto(alto_input)
+        }
+        console.log(ancho)
+        console.log(alto)
     }
 
-    return <h1>Bievenido al Laberinto</h1>
+    return(
+        <div className="app">
+            <h1>Bievenido al Laberinto</h1>
+            <p>Elige las medidas del laberinto: </p>
+            Ancho<input type="number" id="ancho"></input>
+            Alto<input type="number" id="alto"></input>
+            <button onClick={cambiar_Medidas}>Generar</button>
+
+        </div>
+    )
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'))

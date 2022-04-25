@@ -1,30 +1,33 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
-const creacion_Laberinto = async(ancho, alto) =>{
-    const respuesta = await fetch('https://maze.juanelcaballo.club/?type=json&w=${ancho}&h=${alto}')
-        .then(respuesta => respuesta.json())
-        .then(datos => datos)
-    console.log(respuesta)
-    return respuesta
-    .catch(error =>
-        console.log(error))
-}
+import ReactDOM from "react-dom/client";
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react'
 
 const App = () =>{
 
-    const [laberinto, setLaberinto] = React.useState([])
+    const [laberinto, setLaberinto] = React.useState([[]])
     const [ancho, setAncho] = React.useState(4)
     const [alto, setAlto] = React.useState(4)
 
-    const modificar_Laberinto = async() =>{
-        const laberinto_modificado = await creacion_Laberinto(ancho_laberinto, alto_laberinto)
-        setLaberinto(laberinto_modificado)
-    }   
-
-    const actualizar_Laberinto = async(nuevoLaberinto) => {
-        modificar_Laberinto(nuevoLaberinto)
+    const creacion_Laberinto = async (ancho_lab, alto_lab) =>{
+        var api = 'https://maze.juanelcaballo.club/?type=json&w=ancho&h=alto'
+        api = api.replace('ancho', ancho_lab)
+        api = api.replace('alto', alto_lab)
+        console.log(api)
+        const respuesta = await fetch(api)
+            .then(respuesta => respuesta.json())
+            .then(datos => datos)
+            .catch(error => console.log(error))
+    
+        console.log(respuesta)
+        return respuesta
     }
+
+    const modificar_Laberinto = async() =>{
+        const laberinto_modificado = await creacion_Laberinto(ancho, alto)
+        setLaberinto(laberinto_modificado)
+        console.log(laberinto_modificado)
+    }   
 
     const cambiar_Medidas = () =>{
         var ancho_input = Number(document.getElementById("ancho").value)
@@ -35,9 +38,11 @@ const App = () =>{
         if(alto_input !== ""){
             setAlto(alto_input)
         }
-        console.log(ancho)
-        console.log(alto)
     }
+
+    React.useEffect( () => {
+        modificar_Laberinto()
+    }, [])
 
     return(
         <div className="app">
@@ -46,9 +51,13 @@ const App = () =>{
             Ancho<input type="number" id="ancho"></input>
             Alto<input type="number" id="alto"></input>
             <button onClick={cambiar_Medidas}>Generar</button>
-
+            
         </div>
     )
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+const container = document.getElementById('root');
+
+const root = ReactDOM.createRoot(container);
+
+root.render(<App />);

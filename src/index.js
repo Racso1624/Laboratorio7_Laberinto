@@ -11,8 +11,8 @@ const App = () =>{
 
     const tablero_estilo = css `
         display: grid;
-        grid-template-columns: repeat(${(parseInt(ancho) * 3) + 1});
-        grid-template-rows: repeat(${(parseInt(alto) * 2) + 1});
+        grid-template-columns: repeat(${(parseInt(ancho) * 3) + 1}, 20px);
+        grid-template-rows: repeat(${(parseInt(alto) * 2) + 1}, 20px);
     `
 
     const muros_estilo = css `
@@ -76,7 +76,7 @@ const App = () =>{
             Ancho<input type="number" id="ancho" min="1" max="10"></input>
             Alto<input type="number" id="alto" min="1" max="10"></input>
             <button onClick={cambiar_Medidas}>Generar</button>
-            <div className="tablero" id="grid" css = {tablero_estilo}>
+            <div className="tablero" css = {tablero_estilo}>
                 {
                     laberinto.map((posiciony, y) =>
                         posiciony.map((posicionx, x) => {

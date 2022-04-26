@@ -9,6 +9,32 @@ const App = () =>{
     const [ancho, setAncho] = React.useState(4)
     const [alto, setAlto] = React.useState(4)
 
+    const tablero_estilo = css `
+        display: grid;
+        grid-template-columns: repeat(${(parseInt(ancho) * 3) + 1});
+        grid-template-rows: repeat(${(parseInt(alto) * 2) + 1});
+    `
+
+    const muros_estilo = css `
+        height: 20px;
+        width: 20px;
+        background: red;
+    `
+
+    const jugador_estilo = css`
+        height: 20px;
+        width: 20px;
+        background: green;
+        clip-path: polygon(50% 0%, 85% 27%, 50% 100%, 15% 28%);
+    `
+
+    const meta_estilo = css`
+        height: 20px;
+        width: 20px;
+        background: yellow;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    `
+
     const creacion_Laberinto = async (ancho_lab, alto_lab) =>{
         var api = 'https://maze.juanelcaballo.club/?type=json&w=ancho&h=alto'
         api = api.replace('ancho', ancho_lab)
@@ -45,21 +71,30 @@ const App = () =>{
 
     return(
         <div className="app">
-            <h1>Bievenido al Laberinto</h1>
-            <p>Elige las medidas del laberinto: </p>
-            Ancho<input type="number" id="ancho"></input>
-            Alto<input type="number" id="alto"></input>
+            <h1>Bienvenido al Laberinto</h1>
+            <p>Elige las medidas del laberinto (Entre 1 y 10): </p>
+            Ancho<input type="number" id="ancho" min="1" max="10"></input>
+            Alto<input type="number" id="alto" min="1" max="10"></input>
             <button onClick={cambiar_Medidas}>Generar</button>
-            <div className="tablero">
-            {
-                laberinto.map((posiciony, y) =>
-                    posiciony.map((posicionx, x) => {
-                        if(posicionx == "-" || posicionx == "|" || posicionx == "+"){
-                            <p key={(x + 5 + y + 10).toString()}>{posicionx}</p>
-                        }
-                    })
-                )
-            }
+            <div className="tablero" id="grid" css = {tablero_estilo}>
+                {
+                    laberinto.map((posiciony, y) =>
+                        posiciony.map((posicionx, x) => {
+                            if(posicionx == "-" || posicionx == "|" || posicionx == "+"){
+                                return <p key={(x + 5 + y + 10).toString()} css = {muros_estilo}></p>
+                            }
+                            else if(posicionx == "p"){
+                                return <p key={(x + 5 + y + 10).toString()} css = {jugador_estilo}></p>
+                            }
+                            else if(posicionx == "g"){
+                                return <p key={(x + 5 + y + 10).toString()} css = {meta_estilo}></p>
+                            }
+                            else{
+                                return <p key={(x + 5 + y + 10).toString()}>{posicionx}</p>
+                            }
+                        })
+                    )
+                }
             </div>
         </div>
     )

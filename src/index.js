@@ -8,6 +8,7 @@ const App = () =>{
     const [laberinto, setLaberinto] = React.useState([[]])
     const [ancho, setAncho] = React.useState(4)
     const [alto, setAlto] = React.useState(4)
+    const [cambioMedidas, setCambioMedidas] = React.useState(false)
 
     const tablero_estilo = css `
         display: grid;
@@ -18,7 +19,7 @@ const App = () =>{
     const muros_estilo = css `
         height: 20px;
         width: 20px;
-        background: red;
+        background: purple;
     `
 
     const jugador_estilo = css`
@@ -55,15 +56,27 @@ const App = () =>{
     const cambiar_Medidas = () =>{
         var ancho_input = Number(document.getElementById("ancho").value)
         var alto_input = Number(document.getElementById("alto").value)
-        if(ancho_input !== ""){
+        if(0 > ancho_input && ancho_input < 11){
             setAncho(ancho_input)
         }
-        if(alto_input !== ""){
+        if(0 > alto_input && alto_input < 11){
             setAlto(alto_input)
         }
 
-        modificar_Laberinto()
+        setCambioMedidas(true)
     }
+
+    const movimiento = () =>{
+        
+    }
+
+    React.useEffect( () => {
+        if(cambioMedidas === true){
+            modificar_Laberinto()
+            setCambioMedidas(false)
+        }
+    }, [cambioMedidas])
+
 
     React.useEffect( () => {
         modificar_Laberinto()

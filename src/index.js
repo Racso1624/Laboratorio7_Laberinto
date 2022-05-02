@@ -70,6 +70,8 @@ const App = () =>{
 
     const movimiento = () =>{
 
+        const tecla_presionada = event.key
+
     }
 
     React.useEffect( () => {
@@ -83,6 +85,8 @@ const App = () =>{
     React.useEffect( () => {
         modificar_Laberinto()
     }, [])
+
+    window.onkeydown = movimiento
 
     return(
         <div className="app">

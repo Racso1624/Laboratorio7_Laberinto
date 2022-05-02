@@ -56,10 +56,12 @@ const App = () =>{
     const cambiar_Medidas = () =>{
         var ancho_input = Number(document.getElementById("ancho").value)
         var alto_input = Number(document.getElementById("alto").value)
-        if(0 > ancho_input && ancho_input < 11){
+        console.log(ancho_input)
+        if(0 < ancho_input && ancho_input < 11){
+            console.log(ancho_input)
             setAncho(ancho_input)
         }
-        if(0 > alto_input && alto_input < 11){
+        if(0 < alto_input && alto_input < 11){
             setAlto(alto_input)
         }
 
@@ -67,7 +69,7 @@ const App = () =>{
     }
 
     const movimiento = () =>{
-        
+
     }
 
     React.useEffect( () => {

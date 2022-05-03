@@ -148,6 +148,7 @@ const App = () =>{
             <header css = {header_estilo}>
                 <h1>Bienvenido al Laberinto</h1>
                 <p>Elige las medidas del laberinto (Entre 1 y 10): </p>
+                <p>Puedes moverte utilizando las teclas WASD</p>
                 Ancho <input type="number" id="ancho" min="1" max="10"></input>
                 Alto <input type="number" id="alto" min="1" max="10"></input>
                 <button onClick={cambiar_Medidas}>Generar</button>
@@ -157,13 +158,13 @@ const App = () =>{
                 {
                     laberinto.map((posiciony, y) =>
                         posiciony.map((posicionx, x) => {
-                            if(posicionx == "-" || posicionx == "|" || posicionx == "+"){
+                            if(posicionx === "-" || posicionx === "|" || posicionx === "+"){
                                 return <p key={(x + 5 + y + 10).toString()} css = {muros_estilo}></p>
                             }
-                            else if(posicionx == "p"){
+                            else if(posicionx === "p"){
                                 return <p key={(x + 5 + y + 10).toString()} css = {jugador_estilo}></p>
                             }
-                            else if(posicionx == "g"){
+                            else if(posicionx === "g"){
                                 return <p key={(x + 5 + y + 10).toString()} css = {meta_estilo}></p>
                             }
                             else{

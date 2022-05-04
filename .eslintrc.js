@@ -17,5 +17,11 @@ module.exports = {
     'react',
   ],
   rules: {
+    semi: ["error", "never"],
+    "linebreak-style": 0,
+    quotes: ["error", "double"],
+    "react/jsx-equals-spacing" : "off",
+    "react/react-in-jsx-scope" : "off",
+    "react/jsx-filename-extension" : "off",
   },
 };

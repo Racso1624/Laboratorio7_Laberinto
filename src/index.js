@@ -155,31 +155,31 @@ const App = () =>{
             </header>
             <br></br>
             <div className="tablero" css = {tablero_estilo}>
-                {
-                    laberinto.map((posiciony, y) =>
-                        posiciony.map((posicionx, x) => {
-                            if(posicionx === "-" || posicionx === "|" || posicionx === "+"){
-                                return <p key={(x + 5 + y + 10).toString()} css = {muros_estilo}></p>
-                            }
-                            else if(posicionx === "p"){
-                                return <p key={(x + 5 + y + 10).toString()} css = {jugador_estilo}></p>
-                            }
-                            else if(posicionx === "g"){
-                                return <p key={(x + 5 + y + 10).toString()} css = {meta_estilo}></p>
-                            }
-                            else{
-                                return <p key={(x + 5 + y + 10).toString()}>{posicionx}</p>
-                            }
-                        })
-                    )
-                }
+            {
+                laberinto.map((posiciony, y) =>
+                    posiciony.map((posicionx, x) => {
+                        if(posicionx === "-" || posicionx === "|" || posicionx === "+"){
+                            return <p key={(x + 5 + y + 10).toString()} css = {muros_estilo}></p>
+                        }
+                        else if(posicionx === "p"){
+                            return <p key={(x + 5 + y + 10).toString()} css = {jugador_estilo}></p>
+                        }
+                        else if(posicionx === "g"){
+                            return <p key={(x + 5 + y + 10).toString()} css = {meta_estilo}></p>
+                        }
+                        else{
+                            return <p key={(x + 5 + y + 10).toString()}>{posicionx}</p>
+                        }
+                    })
+                )
+            }
             </div>
         </div>
     )
 }
 
-const container = document.getElementById('root');
+const container = document.getElementById("root")
 
-const root = ReactDOM.createRoot(container);
+const root = ReactDOM.createRoot(container)
 
-root.render(<App />);
+root.render(<App />)
